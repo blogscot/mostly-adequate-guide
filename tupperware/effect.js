@@ -1,7 +1,7 @@
 const _ = require('ramda')
 const Maybe = require('./functor').Maybe
 
-// A few convience ramda mappings
+// A few convenience ramda mappings
 const compose = _.compose
 const prop = _.prop
 const head = _.head
