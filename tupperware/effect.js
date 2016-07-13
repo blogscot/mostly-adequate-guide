@@ -1,5 +1,5 @@
 const _ = require('ramda')
-const Maybe = require('./functors')
+const Maybe = require('./functor').Maybe
 
 // A few convience ramda mappings
 const compose = _.compose
@@ -53,13 +53,10 @@ const findParam = function(key) {
 }
 
 /*
-  url returns 'IO String'; a String wrapped in an IO. The 'head' and 'identity'
+  url returns 'IO String'; a String wrapped in an IO. The 'head' and 'equals'
   functions deal with, in this case, strings. They are 'lift' by map to be able
   to operate on IO containers. So we end up with strings wrapped in an array
    wrapped in a Maybe wrapped in an IO. Whoop!
   */
 
   console.log(findParam("searchTerm").unsafePerformIO())
-
-
-

@@ -34,12 +34,12 @@ Maybe.prototype.map = function(f) {
   return this.isNothing() ? Maybe.of(null) : Maybe.of(f(this.__value));
 };
 
-console.log(Maybe.of('Iain Diamond').map(_.match(/a/ig)))
-
-console.log(Maybe.of({
-  name: 'Dinah',
-  age: 14,
-}).map(prop('age')).map(_.add(10)))
+// console.log(Maybe.of('Iain Diamond').map(_.match(/a/ig)))
+//
+// console.log(Maybe.of({
+//   name: 'Dinah',
+//   age: 14,
+// }).map(prop('age')).map(_.add(10)))
 
 
 // Use Cases
@@ -53,13 +53,13 @@ var trace = curry(function(tag, x) {
 const safeHead = xs => Maybe.of(xs[0])
 const streetName = compose(_.map(prop('street')), trace('after-safeHead'), safeHead, prop('addresses'));
 
-console.log(`streetName:`, streetName({ addresses: [], }))
-console.log(`streetNames:`,
-  streetName({ addresses: [
-    { street: 'Shady Ln.', number: 4201, },
-    { street: 'Lazy Ln.', number: 4223, }
-  ]
- }))
+// console.log(`streetName:`, streetName({ addresses: [], }))
+// console.log(`streetNames:`,
+//   streetName({ addresses: [
+//     { street: 'Shady Ln.', number: 4201, },
+//     { street: 'Lazy Ln.', number: 4223, }
+//   ]
+//  }))
 
 
  // Helpers
@@ -84,7 +84,7 @@ var withdraw = curry(function(amount, account) {
  //  getTwenty :: Account -> String
 var getTwenty = compose( maybe("You're broke!", finishTransaction), withdraw(20) )
 
-console.log(getTwenty({ balance: 200.00 }))
-console.log(getTwenty({ balance: 10.00 }))
+// console.log(getTwenty({ balance: 200.00 }))
+// console.log(getTwenty({ balance: 10.00 }))
 
-module.exports = Maybe
+module.exports = {Container, Maybe}
