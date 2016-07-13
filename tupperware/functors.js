@@ -86,3 +86,5 @@ var getTwenty = compose( maybe("You're broke!", finishTransaction), withdraw(20)
 
 console.log(getTwenty({ balance: 200.00 }))
 console.log(getTwenty({ balance: 10.00 }))
+
+module.exports = Maybe

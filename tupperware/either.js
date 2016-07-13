@@ -1,7 +1,7 @@
 const _ = require('ramda')
 const moment = require('moment')
 
-// A few common ramda convience mappings
+// A few convience ramda mappings
 const curry = _.curry
 const compose = _.compose
 const concat = _.concat
