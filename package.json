@@ -11,9 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "accounting": "^0.4.1",
+    "data.maybe": "^1.2.2",
     "data.task": "^3.1.0",
     "lodash.curry": "^4.0.1",
     "moment": "^2.14.1",
-    "ramda": "^0.21.0"
+    "ramda": "^0.21.0",
+    "ramda-maybe": "^0.18.0"
   }
 }
