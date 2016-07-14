@@ -8,7 +8,11 @@ const Maybe = require('data.maybe')
 // a user.
 
 var safeProp = _.curry(function(x, o) {
-  return Maybe.of(o[x]);
+  try {
+    return Maybe.of(o[x]);
+  } catch (e) {
+    return Maybe.of(null)
+  }
 })
 
 var user = {
@@ -23,17 +27,10 @@ var user = {
 }
 
 
-// console.log(safeProp('address')(user))
-const street_name = user => safeProp('address')(user)
-  .chain(address => safeProp('street')(address))
-  .chain(street => safeProp('name')(street).value)
-
-console.assert(street_name(user) == 'Walnut St')
-console.assert(safeProp('address')({}).value == undefined)
-const _street_name = user => safeProp('address')(user)
-.chain(address => address == undefined ? Maybe.of(null) : safeProp('street')(address))
-.chain(street => street == null ? Maybe.of(null) : safeProp('name')(street))
-.chain(name => name == null ? Maybe.of(null) : name)
-console.assert(_street_name({}).value == null)
-console.assert(_street_name({address: {}}).value == null)
-console.assert(_street_name({address: {street: {}}}).value == null)
+const street_name = _.compose(_.chain(safeProp('name')), _.chain(safeProp('street')), safeProp('address'))
+// Happy path
+console.assert(street_name(user).value == 'Walnut St')
+// Unhappy path
+console.assert(street_name({}).value == null)
+console.assert(street_name({address: {}}).value == null)
+console.assert(street_name({address: {street: {}}}).value == null)
