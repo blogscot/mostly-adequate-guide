@@ -1,7 +1,7 @@
 const _ = require('ramda')
 const moment = require('moment')
 
-const Either = require('./Either')
+const Either = require('./either')
 
 const Left = Either.Left
 const Right = Either.Right

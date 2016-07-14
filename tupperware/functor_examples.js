@@ -1,5 +1,5 @@
 const _ = require('ramda')
-const Functor = require('./Functor')
+const Functor = require('./functor')
 
 const Container = Functor.Container
 const Maybe = Functor.Maybe
