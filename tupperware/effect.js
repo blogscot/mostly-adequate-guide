@@ -1,4 +1,5 @@
 const _ = require('ramda')
+const IO = require('./io')
 const Maybe = require('./functor').Maybe
 
 // A few convenience ramda mappings
@@ -9,14 +10,6 @@ const identity = _.identity
 const last = _.last
 const filter = _.filter
 
-
-const IO = function(f) { this.unsafePerformIO = f }
-
-IO.of = x => new IO(() => x )
-
-IO.prototype.map = function(f) {
-  return new IO(_.compose(f, this.unsafePerformIO))
-};
 
 //  io_window :: IO Window
 const io_window = new IO( () => window )

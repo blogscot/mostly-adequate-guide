@@ -1,8 +1,9 @@
 const Task = require('data.task')
 const _ = require('ramda')
 
-const Functor = require('./Functor')
 const Either = require('./Either')
+const Functor = require('./Functor')
+const IO = require('./IO')
 
 const Container = Functor.Container
 const Maybe = Functor.Maybe
@@ -111,3 +112,34 @@ const user4 = { active: false, name: 'Sally' }
 const login_message = _.compose(_.map(showWelcome), checkActive)
 console.assert(login_message(user3).__value === 'Welcome Iain')
 console.assert(login_message(user4).__value === 'Your account is not active')
+
+
+// Exercise 7
+// ==========
+// Write a validation function that checks for a length > 3. It should return
+// Right(x) if it is greater than 3 and Left("You need > 3") otherwise.
+
+const warning = 'Minimum length is 3'
+const validate = x => x.length > 2 ? Right.of(x) : Left.of(warning)
+
+console.assert(validate([1,2,3]).__value != warning)
+console.assert(validate([1,2]).__value == warning)
+
+
+// Exercise 8
+// ==========
+// Use ex7 above and Either as a functor to save the user if they are valid or
+// return the error message string. Remember either's two arguments must return
+// the same type.
+
+var save = x =>
+  new IO(() => {
+    console.log('SAVED USER!')
+    return x + '-saved'
+  })
+
+console.assert(save('Robin').unsafePerformIO() == 'Robin-saved')
+const save_user = _.compose(_.map(save), validate)
+// Note, we're unwrapping IO then Either to get at the value.
+console.assert(save_user('Robin').__value.unsafePerformIO() == 'Robin-saved')
+console.assert(save_user('Ro').__value == warning)
