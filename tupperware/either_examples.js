@@ -40,7 +40,7 @@ const fortune = compose(concat('If you survive, you will be '), add(1))
 //  zoltar :: User -> Either(String, _)
 const zoltar = compose(map(console.log), map(fortune), getAge(moment()))
 
-zoltar({ birthdate: '2005-12-12' })
+console.log(zoltar({ birthdate: '1985-12-12' }))
 console.log(zoltar({ birthdate: 'sex, drugs, rock-n-roll' }))
 
 //  either :: (a -> c) -> (b -> c) -> Either a b -> c
